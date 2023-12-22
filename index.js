@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
       res.send(`<img src='${url}'>`);
 
       // Attempting to set headers or send additional content after response
-      res.setHeader("Content-Type", "text/plain");
+      res.setHeader("Content-Type", "image/png");
     });
   });
 
