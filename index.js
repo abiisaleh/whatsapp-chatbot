@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
       res.send(`<img src='${url}'>`);
 
       //
-      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Content-Type", "text/plain");
     });
   });
 
