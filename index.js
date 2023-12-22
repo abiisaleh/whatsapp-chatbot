@@ -7,15 +7,16 @@ const port = 3000;
 
 //whatsapp api
 const { Client } = require("whatsapp-web.js");
-const client = new Client({
-  puppeteer: {
-    headless: false,
-    args: ["--no-sandbox"],
-    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
-  },
-  qrMaxRetries: 10,
-  disableMessageHistory: true,
-});
+const client = new Client();
+// const client = new Client({
+//   puppeteer: {
+//     headless: false,
+//     args: ["--no-sandbox"],
+//     browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
+//   },
+//   qrMaxRetries: 10,
+//   disableMessageHistory: true,
+// });
 
 // Require the package
 const QRCode = require("qrcode");
