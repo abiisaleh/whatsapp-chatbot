@@ -13,7 +13,7 @@ const client = new Client({
     args: ["--no-sandbox"],
     browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
   },
-  qrMaxRetries: 10,
+  qrMaxRetries: 1,
   disableMessageHistory: true,
 });
 
@@ -28,7 +28,6 @@ app.get("/", (req, res) => {
 
       //generate whatsapp QR Code
       res.send(`<img src='${url}'>`);
-      return;
     });
   });
 
