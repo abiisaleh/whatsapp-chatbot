@@ -1,58 +1,30 @@
 require("dotenv").config({ path: "./.env" });
+const qrcode = require("qrcode-terminal");
 
-//express
-const express = require("express");
-const app = express();
-const port = 3000;
-
-//whatsapp api
 const { Client } = require("whatsapp-web.js");
-const client = new Client({
-  puppeteer: {
-    headless: false,
-    args: ["--no-sandbox"],
-    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
-  },
-  qrMaxRetries: 1,
-  disableMessageHistory: true,
+const client = new Client();
+
+client.on("qr", (qr) => {
+  qrcode.generate(qr, { small: true });
 });
 
-// Require the package
-const QRCode = require("qrcode");
+client.on("ready", () => {
+  console.log("Client is ready!");
+});
 
-app.get("/", (req, res) => {
-  client.on("qr", (qr) => {
-    // Print the QR code to terminal
-    QRCode.toDataURL(qr, function (err, url) {
-      if (err) return console.log("error occurred");
-
-      //generate whatsapp QR Code
-      res.send(`<img src='${url}'>`);
-    });
-  });
-
-  client.on("ready", () => {
-    console.log("Client is ready!");
-  });
-
-  client.on("message", (msg) => {
-    if (msg.body.includes("/bot")) {
-      //chat gpt api
-      async function chatBot(question) {
-        const response = await fetch(
-          process.env.CHATBOT_API_URL + "?question=" + question
-        );
-        const data = await response.json();
-        msg.reply(data);
-      }
-
-      chatBot(msg.body);
+client.on("message", (msg) => {
+  if (msg.body.includes("/bot")) {
+    //chat gpt api
+    async function chatBot(question) {
+      const response = await fetch(
+        process.env.CHATBOT_API_URL + "?question=" + question
+      );
+      const data = await response.json();
+      msg.reply(data);
     }
-  });
 
-  client.initialize();
+    chatBot(msg.body);
+  }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+client.initialize();
