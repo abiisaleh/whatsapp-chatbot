@@ -26,9 +26,6 @@ app.get("/", (req, res) => {
     QRCode.toDataURL(qr, function (err, url) {
       if (err) return console.log("error occurred");
 
-      // Attempting to set headers or send additional content after response
-      res.setHeader("Content-Type", "image/png");
-
       //generate whatsapp QR Code
       res.send(`<img src='${url}'>`);
     });
