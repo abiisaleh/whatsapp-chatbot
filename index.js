@@ -28,9 +28,6 @@ app.get("/", (req, res) => {
 
       //generate whatsapp QR Code
       res.send(`<img src='${url}'>`);
-
-      //
-      res.setHeader("Content-Type", "text/plain");
     });
   });
 
