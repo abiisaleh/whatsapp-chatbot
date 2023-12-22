@@ -2,13 +2,7 @@ require("dotenv").config({ path: "./.env" });
 const qrcode = require("qrcode-terminal");
 
 const { Client } = require("whatsapp-web.js");
-const client = new Client({
-  puppeteer: {
-    // headless: false,
-    // args: ["--no-sandbox"],
-    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
-  },
-});
+const client = new Client();
 
 client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
