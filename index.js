@@ -21,6 +21,19 @@ const client = new Client({
 const QRCode = require("qrcode");
 
 app.get("/", (req, res) => {
+  client.on("qr", (qr) => {
+    // Print the QR code to terminal
+    QRCode.toDataURL(qr, function (err, url) {
+      if (err) return console.log("error occurred");
+
+      // Attempting to set headers or send additional content after response
+      res.setHeader("Content-Type", "text/plain");
+
+      //generate whatsapp QR Code
+      res.send(`<img src='${url}'>`);
+    });
+  });
+
   client.on("ready", () => {
     console.log("Client is ready!");
   });
