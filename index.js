@@ -2,11 +2,11 @@ require("dotenv").config({ path: "./.env" });
 const qrcode = require("qrcode-terminal");
 
 const fs = require('fs'); 
-const { Client, localAuth } = require('whatsapp-web.js'); 
+const { Client, LocalAuth } = require('whatsapp-web.js'); 
 
 // Use the saved values 
 const client = new Client({ 
-  authStrategy: new localAuth({ 
+  authStrategy: new LocalAuth({ 
     clientId: "amin" 
   }),
   puppeteer: {
