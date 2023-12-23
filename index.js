@@ -19,7 +19,7 @@ client.on("ready", () => {
 });
 
 client.on("message", (msg) => {
-  if (msg.body.includes("/bot")) {
+  if (msg.body.startsWith("/bot")) {
     //chat gpt api
     async function chatBot(question) {
       const response = await fetch(
