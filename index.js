@@ -6,7 +6,9 @@ const { Client, localAuth } = require('whatsapp-web.js');
 
 // Use the saved values 
 const client = new Client({ 
-  authStrategy: new localAuth(),
+  authStrategy: new localAuth({ 
+    clientId: "amin" 
+  }),
   puppeteer: {
     args: ["--no-sandbox"],
     browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
