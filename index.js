@@ -6,6 +6,7 @@ const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
     args: ["--no-sandbox"],
+    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.browserless_api}`,
   },
 });
 
